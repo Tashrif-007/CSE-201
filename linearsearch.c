@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<time.h>
-int linsearch(int num[], int size, int target)
+void linsearch(int num[], int size, int target)
 {
     int i=0;
     while(i<size)
