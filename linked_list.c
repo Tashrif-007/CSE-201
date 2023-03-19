@@ -18,16 +18,11 @@ void insertlast(int n)
     struct node *link=(struct node*)malloc(sizeof(struct node));
     link->data= n;
     link->next= NULL;
-    if(head==NULL)
-    {
-        head= link;
-        temp= link;
-    }
-    else
-    {
-        temp->next= link;
-        temp=link;
-    }
+    temp= head;
+    while(temp->next!=NULL)
+    temp= temp->next;
+
+    temp->next= link;
 }
 void print()
 {
@@ -47,16 +42,36 @@ void deletebegin()
 }
 void deletelast()
 {
-    temp=head;
-    int i=0;
-    int j= len();
-    while(i<j-2)
+    struct node *prev;
+    temp= head;
+    while(temp->next!=NULL)
     {
+        prev= temp;
         temp= temp->next;
+    }
+    if(temp==head)
+    head=NULL;
+    else
+    prev->next= NULL;
+    free(temp);
+}
+void delete_between(){
+    struct node *link;
+    temp=head;
+    int pos,i=1;
+    printf("\nEnter position to delete:");
+    scanf("%d",&pos);
+
+    while(i<pos-1){
+        temp=temp->next;
         i++;
     }
-    temp->next=NULL;
+    link=temp->next;
+    temp->next=link->next;
+
+    free(link);
 }
+
 int len()
 {
     temp=head;
@@ -86,7 +101,7 @@ int main()
 {
     int c,n;
     while(1){
-    printf("Enter choice: \n1.Insertbegin, 2.insertend, 3.deletebegin, 4.printlist: ");
+    printf("Enter choice: \n1.Insertbegin, 2.insertend, 3.deletebegin, 4.printlist, 5.insert_between, 6.delete_last, 7.length, 8.delete_between: ");
     scanf("%d", &c);
     if(c==1)
     {
@@ -116,6 +131,8 @@ int main()
     deletelast();
     else if(c==7)
     printf("%d",len());
+    else if(c==8)
+    delete_between();
     else
     break;
     }
