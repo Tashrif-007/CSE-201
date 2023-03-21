@@ -109,12 +109,45 @@ void printrev()
 }
 int main()
 {
-    insertlast(12);
-    insertlast(23);
-    insertlast(232);
-    insertlast(2);
-    insertlast(289);
-    delete_between(2);
+     int c,n;
+    while(1){
+    printf("Enter choice: \n1.Insertbegin, 2.insertend, 3.deletebegin, 4.printlist, 5.insert_between, 6.delete_last, 7.delete_between, 8.printrev: ");
+    scanf("%d", &c);
+    if(c==1)
+    {
+        printf("Enter value: ");
+        scanf("%d", &n);
+        insertbegin(n);
+    }
+    else if(c==2)
+    {
+        printf("Enter value: ");
+        scanf("%d", &n);
+        insertlast(n);
+    }
+    else if(c==3)
+    deletefirst();
+    else if(c==4)
     print();
+    else if(c==5)
+    {
+        printf("Enter value: ");
+        scanf("%d", &n);
+        printf("Enter position: ");
+        scanf("%d", &c);
+        insert_between(c,n);
+    }
+    else if(c==6)
+    deletelast();
+    else if(c==7){
+    printf("Enter position to delete: ");
+    scanf("%d", &n);
+    delete_between(n);
+    }
+    else if(c==8)
+    printrev();
+    else
+    break;
+    }
     return 0;
 }
