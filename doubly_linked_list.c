@@ -5,7 +5,7 @@ struct node{
     struct node *next;
     struct node *prev;
 };
-struct node *head=NULL,*temp;
+struct node *head,*temp;
 
 void insertbegin(int n)
 {
