@@ -8,6 +8,7 @@ void enqueue(int n)
     if(rear == size-1){
         printf("Overflow");
         return;}
+    if(front==-1)
     front=0;
     rear++;
     queue[rear]=n;
