@@ -21,18 +21,29 @@ struct node* insert(struct node* root, int data)
     return create(data);
     if(data<root->data)
     root->left=insert(root->left, data);
-    else if(data>root->data)
+    else
     root->right= insert(root->right, data);
     return root;
 }
-void preorder(struct node* root)
+void preorder(struct node* root, int size)
 {
+    struct node *stack[size];
+    int top=-1;
     if(root==NULL)
     return;
-    printf("%d ", root->data);
-    preorder(root->left);
-    preorder(root->right);
+    
+    stack[++top]= root;
+    while(top>=0)
+    {
+        struct node *temp = stack[top--];
+        printf("%d ", temp->data);
+        if(temp->right!=NULL)
+        stack[++top]=temp->right;
+        if(temp->left!=NULL)
+        stack[++top]=temp->left;
+    }
 }
+
 int main() {
     struct node *root = (struct node*)malloc(sizeof(struct node));
     root=NULL;
@@ -42,6 +53,6 @@ int main() {
     insert(root, 20);
     insert(root, 30);
     insert(root, 40);
-    preorder(root);
+    preorder(root, 6);
     return 0;
 }
