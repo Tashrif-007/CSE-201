@@ -44,6 +44,30 @@ void preorder(struct node* root, int size)
     }
 }
 
+void level_order(struct node *root, int size)
+{
+    struct node *queue[size];
+    int front=0,rear=0,level=1;
+    if(root==NULL)
+    return;
+    queue[rear++]=root;
+    
+    while(front<rear)
+    {
+        struct node *temp = queue[front++];
+        printf("%d ", temp->data);
+        level--;
+        
+        if(temp->left!=NULL)
+        queue[rear++]=temp->left;
+        if(temp->right!=NULL)
+        queue[rear++]=temp->right;
+        if(level==0){
+        printf("\n");
+        level = rear-front;
+        }
+    }
+}
 int main() {
     struct node *root = (struct node*)malloc(sizeof(struct node));
     root=NULL;
@@ -54,5 +78,7 @@ int main() {
     insert(root, 30);
     insert(root, 40);
     preorder(root, 6);
+    printf("\n");
+    level_order(root, 6);
     return 0;
 }
