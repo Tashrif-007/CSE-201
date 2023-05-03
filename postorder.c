@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 struct tree* create_tree();
-void inorder(int size);
+void postorder(int size);
 
 struct tree{
     int data;
@@ -45,7 +45,7 @@ struct tree* create_tree(){
 
 }
 
-void inorder(int size){
+void postorder(int size){
     struct tree *stack[size],*current, *lastvisited,*peek;
     int top=-1;
     current=root;
