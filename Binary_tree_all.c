@@ -89,6 +89,30 @@ void inorder(int size)
         temp= temp->right;
     }
 }
+void postorder(int size){
+    struct tree *stack[size],*current, *lastvisited,*peek;
+    int top=-1;
+    current=root;
+    lastvisited=NULL;
+
+
+    while(current!=NULL || top!=-1){
+        while(current!=NULL){
+            stack[++top]=current;
+            current=current->left;
+
+        }
+        peek=stack[top];
+        if(peek->right==NULL || peek->right==lastvisited){
+            printf("%d ",peek->data);
+            lastvisited=peek;
+            top--;
+        }else{
+            current=peek->right;
+        }
+
+    }
+}
 int main() {
     int size;
     printf("Enter size of the tree:");
