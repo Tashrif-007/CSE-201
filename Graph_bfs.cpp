@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-const int MAXN = 1005;
+const int MAXN = 1000;
 
 bool g[5][5]={{0,1,1,0,0},
                 {1,0,0,1,0},
@@ -32,6 +32,6 @@ void bfs(int start, int n) {
 }
 int main(){
 
-    bfs(2,5);
+    bfs(1,5);
     return 0;
 }
