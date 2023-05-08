@@ -42,7 +42,6 @@ void bfs(vector<vector<Node>>&graph, int start, int n)
         int temp=q.front();
         q.pop();
         cout<<temp<<" ";
-        int i=0;
         for(auto x : graph[start])
         {
             int v = x.getV();
@@ -51,7 +50,6 @@ void bfs(vector<vector<Node>>&graph, int start, int n)
                 visited[v]=true;
                 q.push(v);
             }
-            i++;
         }
     }
 }
