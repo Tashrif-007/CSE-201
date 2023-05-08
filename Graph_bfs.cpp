@@ -1,37 +1,78 @@
-#include <iostream>
-#include <queue>
+#include<bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1000;
-
-bool g[5][5]={{0,1,1,0,0},
-                {1,0,0,1,0},
-                {1,0,0,1,0},
-                {0,1,1,0,1},
-                {0,0,0,1,0}
-    };
-bool visited[MAXN];
-
-void bfs(int start, int n) {
-    queue<int> q;
+class Node{
+public:
+    int x,y;
+    Node(int x, int y)
+    {
+        this->x=x;
+        this->y=y;
+    }
+    int getV()
+    {
+        return y;
+    }
+};
+void create(vector<vector<Node>>&graph,int x, int y)
+{
+    graph[x].push_back(Node(x,y));
+    graph[y].push_back(Node(y,x));
+}
+void print(vector<vector<Node>>&graph, int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        cout<<"Adjacent vertex of "<<i<<": "<<endl;
+        for(int j=0; j<graph[i].size(); j++){
+        Node n = graph[i][j];
+        cout<<"("<<n.x<<" "<<n.y<<")"<<" ";
+        }
+        cout<<endl;
+    }
+}
+void bfs(vector<vector<Node>>&graph, int start, int n)
+{
+    queue<int>q;
+    bool visited[n]={false};
     q.push(start);
-    visited[start] = true;
-
-    while(!q.empty()) {
-        int curr = q.front();
+    visited[start]=true;
+    while(!q.empty())
+    {
+        int temp=q.front();
         q.pop();
-        cout << curr << " ";
-
-        for(int i=1; i<=n; i++) {
-            if(g[curr][i] && !visited[i]) {
-                q.push(i);
-                visited[i] = true;
+        cout<<temp<<" ";
+        int i=0;
+        for(auto x : graph[start])
+        {
+            int v = x.getV();
+            if(!visited[v])
+            {
+                visited[v]=true;
+                q.push(v);
             }
+            i++;
         }
     }
 }
-int main(){
-
-    bfs(1,5);
+int main()
+{
+    int n,x,y,start,e;
+    cout<<"Enter number of Vertex: "<<endl;
+    cin>>n;
+    cout<<"Enter number of edges: "<<endl;
+    cin>>e;
+    vector<vector<Node>>graph(n);
+    cout<<"Enter the connected vertices: "<<endl;
+    for(int i=0; i<e; i++)
+    {
+        cin>>x>>y;
+        create(graph, x, y);
+    }
+    print(graph, n);
+    cout<<endl;
+    cout<<"Enter starting point: ";
+    cin>>start;
+    bfs(graph, start, n);
     return 0;
 }
