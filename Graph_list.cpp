@@ -1,39 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Graph{
+class Node{
 public:
-    int x,y,n;
-    Graph(int n){
-        graph.resize(n);
-    }
-    vector<vector<int>>graph;
-    void create(int x, int y)
+    int x,y;
+    Node(int x, int y)
     {
-        graph[x].push_back(y);
-        graph[y].push_back(x);
-    }
-    void print()
-    {
-        for(int i=0; i<graph.size(); i++)
-        {
-            cout<<"Adjacent vertex of " << i <<": ";
-            for(int j=0; j<graph[i].size(); j++)
-                cout<<graph[i][j]<<" ";
-            cout<<endl;
-        }
+        this->x=x;
+        this->y=y;
     }
 };
+void create(vector<vector<Node>>&graph,int x, int y)
+{
+    graph[x].push_back(Node(x,y));
+    graph[y].push_back(Node(y,x));
+}
+void print(vector<vector<Node>>&graph, int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        cout<<"Adjacent vertex of "<<i<<": "<<endl;
+        for(int j=0; j<graph[i].size(); j++){
+        Node n = graph[i][j];
+        cout<<"("<<n.x<<" "<<n.y<<")"<<" ";
+        }
+        cout<<endl;
+    }
+}
 int main()
 {
-    Graph g(5);
-    g.create(0, 1);
-    g.create(0, 4);
-    g.create(1, 2);
-    g.create(1, 3);
-    g.create(1, 4);
-    g.create(2, 3);
-    g.create(3, 4);
-    g.print();
+    int n,x,y;
+    cout<<"Enter number of Vertex: "<<endl;
+    cin>>n;
+    vector<vector<Node>>graph(n);
+    cout<<"Enter the connected vertices: "<<endl;
+    for(int i=0; i<n; i++)
+    {
+        cin>>x>>y;
+        create(graph, x, y);
+    }
+    print(graph, n);
     return 0;
 }
