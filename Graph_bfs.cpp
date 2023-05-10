@@ -24,35 +24,41 @@ void print(vector<vector<Node>>&graph, int n)
     for(int i=0; i<n; i++)
     {
         cout<<"Adjacent vertex of "<<i<<": "<<endl;
-        for(int j=0; j<graph[i].size(); j++){
+        for(int j=0; j<=graph[i].size(); j++){
         Node n = graph[i][j];
         cout<<"("<<n.x<<" "<<n.y<<")"<<" ";
         }
         cout<<endl;
     }
 }
-void bfs(vector<vector<Node>>&graph, int start, int n)
+void bfs(vector<vector<Node>>& graph, int start, int n)
 {
-    queue<int>q;
-    bool visited[n]={false};
+    queue<int> q;
+    vector<bool> visited(n, false);
+    vector<int> path(n, 0);
     q.push(start);
-    visited[start]=true;
-    while(!q.empty())
+    visited[start] = true;
+    while (!q.empty())
     {
-        int temp=q.front();
+        int temp = q.front();
         q.pop();
-        cout<<temp<<" ";
-        for(auto x : graph[start])
+        cout << temp << " ";
+        for (auto x : graph[temp])
         {
             int v = x.getV();
-            if(!visited[v])
+            if (!visited[v])
             {
-                visited[v]=true;
+                visited[v] = true;
                 q.push(v);
+                path[v] = path[temp] + 1; 
             }
         }
     }
+    cout << endl;
+    for (int i = 0; i < n; i++)
+        cout << "Distance from " << start << " to " << i << ": " << path[i] << endl;
 }
+
 int main()
 {
     int n,x,y,start,e;
@@ -72,5 +78,6 @@ int main()
     cout<<"Enter starting point: ";
     cin>>start;
     bfs(graph, start, n);
+    
     return 0;
 }
