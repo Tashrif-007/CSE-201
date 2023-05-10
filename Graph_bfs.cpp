@@ -1,64 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node{
-public:
-    int x,y;
-    Node(int x, int y)
-    {
-        this->x=x;
-        this->y=y;
-    }
-    int getV()
-    {
-        return y;
-    }
-};
-void create(vector<vector<Node>>&graph,int x, int y)
+void create(vector<vector<int>>&graph,int x, int y)
 {
-    graph[x].push_back(Node(x,y));
-    graph[y].push_back(Node(y,x));
+    graph[x].push_back(y);
+    graph[y].push_back(x);
 }
-void print(vector<vector<Node>>&graph, int n)
+void print(vector<vector<int>>&graph, int n)
 {
     for(int i=0; i<n; i++)
     {
         cout<<"Adjacent vertex of "<<i<<": "<<endl;
-        for(int j=0; j<=graph[i].size(); j++){
-        Node n = graph[i][j];
-        cout<<"("<<n.x<<" "<<n.y<<")"<<" ";
+        for(int j=0; j<graph[i].size(); j++){
+        cout<<"("<<graph[i][j]<<")"<<" ";
         }
         cout<<endl;
     }
 }
-void bfs(vector<vector<Node>>& graph, int start, int n)
-{
-    queue<int> q;
-    vector<bool> visited(n, false);
-    vector<int> path(n, 0);
-    q.push(start);
-    visited[start] = true;
-    while (!q.empty())
-    {
-        int temp = q.front();
-        q.pop();
-        cout << temp << " ";
-        for (auto x : graph[temp])
-        {
-            int v = x.getV();
-            if (!visited[v])
-            {
-                visited[v] = true;
-                q.push(v);
-                path[v] = path[temp] + 1; 
-            }
-        }
-    }
-    cout << endl;
-    for (int i = 0; i < n; i++)
-        cout << "Distance from " << start << " to " << i << ": " << path[i] << endl;
-}
-
 int main()
 {
     int n,x,y,start,e;
@@ -66,7 +24,7 @@ int main()
     cin>>n;
     cout<<"Enter number of edges: "<<endl;
     cin>>e;
-    vector<vector<Node>>graph(n);
+    vector<vector<int>>graph(n);
     cout<<"Enter the connected vertices: "<<endl;
     for(int i=0; i<e; i++)
     {
@@ -74,10 +32,5 @@ int main()
         create(graph, x, y);
     }
     print(graph, n);
-    cout<<endl;
-    cout<<"Enter starting point: ";
-    cin>>start;
-    bfs(graph, start, n);
-    
     return 0;
 }
