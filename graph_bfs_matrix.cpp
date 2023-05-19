@@ -2,7 +2,7 @@
 using namespace std;
 
 int graph[20][20] = {0};
-int q[20], f = -1, r = -1;
+int q[20]={0}, f = -1, r = -1;
 
 void enqueue(int n)
 {
@@ -47,9 +47,11 @@ void print(int v)
 
 void bfs(int start, int v)
 {
-    int visited[20] = {0};
+    int visited[v] = {0};
     enqueue(start);
+    int path[v]={0};
     visited[start] = 1;
+    cout<<"BFS Traversal: "<<endl;
     while (f <= r)
     {
         int temp = dequeue();
@@ -60,14 +62,18 @@ void bfs(int start, int v)
             {
                 visited[i] = 1;
                 enqueue(i);
+                path[i] = path[temp] + 1;
             }
         }
     }
+
+    for(int i=0; i<v; i++)
+        cout<<"Distance from "<<start<<" to "<<i<<": "<<path[i]<<endl;
 }
 
 int main()
 {
-    int x, y, v, e;
+    int x, y, v, e,start;
     cout << "Enter the number of vertices: ";
     cin >> v;
     cout << "Enter the number of edges: ";
@@ -79,13 +85,10 @@ int main()
         create(x, y);
     }
 
-    cout << "BFS traversal starting from vertex 0: ";
-    bfs(0, v);
+    cout << "Enter starting: ";
+    cin>>start;
+    bfs(start, v);
     cout << endl;
-
-    // Print the adjacency list
-    cout << "Adjacency list:\n";
-    print(v);
 
     return 0;
 }
