@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void insert(int num[], int n)
+void insertion_sort(int num[], int n)
 {
     int i,j,temp;
     for(i=1; i<n; i++)
@@ -18,7 +18,7 @@ void insert(int num[], int n)
 int main()
 {
     int num[]={45,32,1,55,76};
-    insert(num, 5);
+    insertion_sort(num, 5);
     for(int i=0; i<5; i++)
     printf("%d ", num[i]);
     return 0;
