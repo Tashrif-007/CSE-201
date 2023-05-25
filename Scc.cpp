@@ -62,6 +62,7 @@ void findScc(int numV)
     {
         colors[u]="WHITE";
     }
+    cout<<"Strongly Connected Components: "<<endl;
     while(!st.empty())
     {
         int temp = st.top();
