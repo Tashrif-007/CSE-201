@@ -93,7 +93,7 @@ int main()
         }
         create(x, y);
     }
-    cout<<"Enter starting country";
+    cout<<"Enter starting country: ";
     cin>>a;
     for(int i=0; i<v; i++)
     {
