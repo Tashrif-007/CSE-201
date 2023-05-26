@@ -32,6 +32,23 @@ void heapsort(int num[], int size)
     }
 }
 
+void insert(int num[], int *size, int n)
+{
+    *size = *size +1;
+    num[*size-1]=n;
+    int i=*size-1;
+    
+    while(i>0)
+    {
+        int parent = (i-1)/2;
+        if(num[parent]<num[i]){
+        swap(num[parent], num[i]);
+        i = parent;
+        }
+        else
+        return;
+    }
+}
 int extractMax(int num[], int &size)
 {
     if (size <= 0) {
