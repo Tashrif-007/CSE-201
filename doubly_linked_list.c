@@ -14,22 +14,21 @@ void insertbegin(int n)
     link->next=head;
     head=link;
 }
-void insert_between(int key, int n)
+void insert_pos(int data, int pos)
 {
-    struct node *link=(struct node*)malloc(sizeof(struct node));
+    struct node *link = (struct node*)malloc(sizeof(struct node));
+    link->data = data;
     int i=1;
-    link->data = n;
     temp = head;
-    while(i<key)
+    while(i<pos)
     {
         temp = temp->next;
         i++;
     }
-    link->next= temp->next;
-    link->prev = temp;
-    temp->next= link;
-    temp = temp->next;
-    temp->prev =link;
+    link->next=temp;
+    link->prev = temp->prev;
+    temp->prev->next = link;
+    temp->prev = link;
 }
 void insertlast(int n)
 {
