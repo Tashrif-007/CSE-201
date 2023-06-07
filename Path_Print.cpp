@@ -4,18 +4,23 @@ using namespace std;
 int visited[20]={0};
 int Adj[20][20] = {0};
 int paths;
+int path[20];
 
 void pathCalc(int u, int dest, int numV)
 {
     visited[u]= 1;
-    
+    path[paths]=u;
+    paths++;
     if(u==dest)
     {
-        paths++;
-        visited[u]=0;
-        return;
+        for(int i=0; i<paths; i++)
+        {
+            cout<<path[i]<<" ";   
+        }
+        cout<<endl;
     }
-
+    else
+    {
     for (int v = 0; v < numV; v++)
     {
         if (Adj[u][v] && !visited[v])
@@ -23,8 +28,9 @@ void pathCalc(int u, int dest, int numV)
             pathCalc(v, dest, numV);
         }
     }
-    
+    }
     visited[u]=0;
+    paths--;
 }
 
 int main()
@@ -50,6 +56,6 @@ int main()
     
     pathCalc(source, dest, numVertices);
 
-    cout<<paths;
+    
     return 0;
 }
